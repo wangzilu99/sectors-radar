@@ -135,58 +135,30 @@ def fetch_av_news(api_key):
     } for i in strong[:5]]
 
 # ──────────────────────────────────────────
-#  新浪财经新闻（A股）
+#  Alpha Vantage 中国相关新闻（用于A股视图）
 # ──────────────────────────────────────────
-BULL_WORDS = ['上涨','暴涨','大涨','突破','盈利','增持','利好','超预期',
-              '创新高','回购','扩张','走强','反弹','拉升','获批','放量']
-BEAR_WORDS = ['下跌','暴跌','大跌','崩盘','亏损','违约','制裁','警告',
-              '风险','危机','下调','减持','利空','走弱','下滑','缩量',
-              '调查','罚款','退市','暂停']
-
-def score_title(title):
-    bull = sum(1 for w in BULL_WORDS if w in title)
-    bear = sum(1 for w in BEAR_WORDS if w in title)
-    if bull == 0 and bear == 0:
-        return None, 0
-    if bull > bear:
-        return 'Bullish', bull
-    elif bear > bull:
-        return 'Bearish', bear
-    else:
-        return None, 0  # 中性，跳过
-
-def fetch_sina_news():
-    """从新浪财经滚动新闻获取A股市场信号，返回最多5条强情绪新闻"""
-    url = ('https://feed.mix.sina.com.cn/api/roll/get'
-           '?pageid=153&lid=2516&k=&num=50&page=1')
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
-        'Referer':    'https://finance.sina.com.cn',
-    }
-    req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req, timeout=10) as r:
-        data = json.loads(r.read().decode('utf-8', errors='replace'))
-
-    items = data.get('result', {}).get('data', [])
-    scored = []
-    for item in items:
-        title = item.get('title', '')
-        url_  = item.get('url', '')
-        ctime = item.get('ctime', '')
-        sentiment, strength = score_title(title)
-        if sentiment:
-            scored.append({
-                'title':     title,
-                'url':       url_,
-                'source':    '新浪财经',
-                'sentiment': sentiment,
-                'score':     strength if sentiment == 'Bullish' else -strength,
-                'time':      ctime[:16] if ctime else '',
-            })
-
-    # 按强度绝对值排序，取前5
-    scored.sort(key=lambda x: abs(x['score']), reverse=True)
-    return scored[:5]
+def fetch_av_china_news(api_key):
+    """用 tickers 过滤中国相关报道，有 AI 情绪评分，质量高于关键词过滤"""
+    url = (f'https://www.alphavantage.co/query'
+           f'?function=NEWS_SENTIMENT'
+           f'&tickers=ASHR,FXI,KWEB,BABA,BIDU'
+           f'&sort=RELEVANCE&limit=50&apikey={api_key}')
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        data = json.loads(r.read())
+    if 'Note' in data or 'Information' in data:
+        raise RuntimeError('RATE_LIMIT')
+    feed = data.get('feed', [])
+    strong = [i for i in feed if i.get('overall_sentiment_label') in ('Bullish','Bearish')]
+    strong.sort(key=lambda x: float(x.get('relevance_score',0)), reverse=True)
+    return [{
+        'title':     i.get('title',''),
+        'url':       i.get('url',''),
+        'source':    i.get('source',''),
+        'sentiment': i.get('overall_sentiment_label','Neutral'),
+        'score':     AV_SENTIMENT.get(i.get('overall_sentiment_label','Neutral'), 0),
+        'time':      i.get('time_published','')[:12],
+    } for i in strong[:5]]
 
 # ──────────────────────────────────────────
 #  新浪财经行情
@@ -344,12 +316,12 @@ def run_cn():
         time.sleep(0.3)
 
     news = []
-    print(f'\n▶ A股新闻')
+    print(f'\n▶ A股新闻（Alpha Vantage 中国相关）')
     try:
-        news = fetch_sina_news()
+        news = fetch_av_china_news(AV_KEYS[1])
         print(f'  获取 {len(news)} 条')
         for n in news:
-            print(f'  [{n["sentiment"]}] {n["title"][:50]}')
+            print(f'  [{n["sentiment"]}] {n["title"][:60]}')
     except Exception as e:
         print(f'  新闻失败: {e}')
 

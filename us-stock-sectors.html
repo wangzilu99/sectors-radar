@@ -321,7 +321,7 @@ function renderNews(news, isCN) {
   if (!news||!news.length) { show('news-section', false); return; }
   // 来源标注
   document.getElementById('news-src').textContent =
-    isCN ? '来源：新浪财经 · 关键词情绪过滤' : '来源：Alpha Vantage · AI情绪评分';
+    isCN ? '来源：Alpha Vantage · 中国相关 · AI情绪评分' : '来源：Alpha Vantage · AI情绪评分';
 
   const html = news.map(n => {
     const bull = n.sentiment === 'Bullish';

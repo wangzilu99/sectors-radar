@@ -1,7 +1,7 @@
 {
   "market": "cn",
-  "updated_at": "2026-09-07 15:37:16",
-  "updated_ts": 1788766636464,
+  "updated_at": "2026-09-07 16:08:38",
+  "updated_ts": 1788768518878,
   "sectors": [
     {
       "name": "半导体",
@@ -379,6 +379,48 @@
         1615.531
       ],
       "price": 1615.5305
+    }
+  ],
+  "news": [
+    {
+      "title": "华林证券净利润大降23%严重跑输行业 自营收入大跌近6成 核心策略与市场风格错配|券商半年报",
+      "url": "https://finance.sina.com.cn/stock/observe/2026-09-07/doc-iniqyvru9581850.shtml",
+      "source": "新浪财经",
+      "sentiment": "Bearish",
+      "score": -1,
+      "time": "1788767895"
+    },
+    {
+      "title": "熊猫金控正式退市，信披违规投资者仍可关注索赔",
+      "url": "https://finance.sina.com.cn/stock/gmwq/rightscase/2026-09-07/doc-iniqyvry5525759.shtml",
+      "source": "新浪财经",
+      "sentiment": "Bearish",
+      "score": -1,
+      "time": "1788767351"
+    },
+    {
+      "title": "*ST萃华无力回天，退市警报持续拉响",
+      "url": "https://finance.sina.com.cn/stock/gmwq/rightscase/2026-09-07/doc-iniqyvrz0357315.shtml",
+      "source": "新浪财经",
+      "sentiment": "Bearish",
+      "score": -1,
+      "time": "1788767346"
+    },
+    {
+      "title": "兴业科技股价“一字跌停”，证监会出手立案调查",
+      "url": "https://finance.sina.com.cn/stock/gmwq/rightscase/2026-09-07/doc-iniqyvrz0357021.shtml",
+      "source": "新浪财经",
+      "sentiment": "Bearish",
+      "score": -1,
+      "time": "1788767342"
+    },
+    {
+      "title": "Liquid Network联盟钱包被提取约4000枚比特币，侧链暂停交易",
+      "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-07/doc-iniqyvrz0353244.shtml",
+      "source": "新浪财经",
+      "sentiment": "Bearish",
+      "score": -1,
+      "time": "1788766886"
     }
   ]
 }

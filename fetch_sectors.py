@@ -4,11 +4,7 @@
 
 用法：
   python3 fetch_sectors.py us   # 美股板块 + 大盘 + 新闻（约5分钟）
-  python3 fetch_sectors.py cn   # A股板块 + 大盘（约15秒）
-
-GitHub Actions / crontab 自动执行：
-  美股：每天 08:00（北京时间）
-  A股：工作日交易时间每 10 分钟
+  python3 fetch_sectors.py cn   # A股板块 + 大盘 + 新闻（约15秒）
 """
 
 import json, time, sys, os, urllib.request, re
@@ -16,7 +12,7 @@ from datetime import datetime
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-AV_KEYS  = [
+AV_KEYS = [
     os.environ.get('AV_KEY_1', '7WPA9V1S2FY7482L'),
     os.environ.get('AV_KEY_2', 'SD42Y3USGQ4DLABB'),
 ]
@@ -51,10 +47,10 @@ US_SECTORS = [
 ]
 
 US_INDEX = [
-    {'name':'标普500', 'icon':'🇺🇸', 'sym':'SPY' },
-    {'name':'纳斯达克','icon':'💻',  'sym':'QQQ' },
-    {'name':'道琼斯',  'icon':'🏛️', 'sym':'DIA' },
-    {'name':'小盘股',  'icon':'📊',  'sym':'IWM' },
+    {'name':'标普500', 'icon':'🇺🇸', 'sym':'SPY'},
+    {'name':'纳斯达克','icon':'💻',  'sym':'QQQ'},
+    {'name':'道琼斯',  'icon':'🏛️', 'sym':'DIA'},
+    {'name':'小盘股',  'icon':'📊',  'sym':'IWM'},
 ]
 
 CN_SECTORS = [
@@ -89,7 +85,7 @@ CN_INDEX = [
 ]
 
 # ──────────────────────────────────────────
-#  Alpha Vantage 行情
+#  Alpha Vantage
 # ──────────────────────────────────────────
 def fetch_av_daily(sym, api_key):
     url = (f'https://www.alphavantage.co/query'
@@ -113,44 +109,87 @@ def fetch_av_daily(sym, api_key):
     spark = list(reversed(closes[:min(5, len(closes))]))
     return round(chg1d, 3), round(chg5d, 3), [round(x, 4) for x in spark], round(closes[0], 4)
 
-# ──────────────────────────────────────────
-#  Alpha Vantage 新闻
-# ──────────────────────────────────────────
-SENTIMENT_SCORE = {
-    'Bearish': -2, 'Somewhat-Bearish': -1,
-    'Neutral': 0,
-    'Somewhat-Bullish': 1, 'Bullish': 2,
-}
 
-def fetch_news(api_key):
+AV_SENTIMENT = {'Bearish':-2,'Somewhat-Bearish':-1,'Neutral':0,'Somewhat-Bullish':1,'Bullish':2}
+
+def fetch_av_news(api_key):
     url = (f'https://www.alphavantage.co/query'
            f'?function=NEWS_SENTIMENT'
            f'&topics=economy,geopolitics,technology,finance'
-           f'&sort=RELEVANCE&limit=50'
-           f'&apikey={api_key}')
+           f'&sort=RELEVANCE&limit=50&apikey={api_key}')
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     with urllib.request.urlopen(req, timeout=20) as r:
         data = json.loads(r.read())
     if 'Note' in data or 'Information' in data:
         raise RuntimeError('RATE_LIMIT')
     feed = data.get('feed', [])
-    strong = [i for i in feed if i.get('overall_sentiment_label') in ('Bullish', 'Bearish')]
-    strong.sort(key=lambda x: float(x.get('relevance_score', 0)), reverse=True)
-    result = []
-    for item in strong[:5]:
-        label = item.get('overall_sentiment_label', 'Neutral')
-        result.append({
-            'title':     item.get('title', ''),
-            'url':       item.get('url', ''),
-            'source':    item.get('source', ''),
-            'sentiment': label,
-            'score':     SENTIMENT_SCORE.get(label, 0),
-            'time':      item.get('time_published', '')[:12],
-        })
-    return result
+    strong = [i for i in feed if i.get('overall_sentiment_label') in ('Bullish','Bearish')]
+    strong.sort(key=lambda x: float(x.get('relevance_score',0)), reverse=True)
+    return [{
+        'title':     i.get('title',''),
+        'url':       i.get('url',''),
+        'source':    i.get('source',''),
+        'sentiment': i.get('overall_sentiment_label','Neutral'),
+        'score':     AV_SENTIMENT.get(i.get('overall_sentiment_label','Neutral'), 0),
+        'time':      i.get('time_published','')[:12],
+    } for i in strong[:5]]
 
 # ──────────────────────────────────────────
-#  新浪财经
+#  新浪财经新闻（A股）
+# ──────────────────────────────────────────
+BULL_WORDS = ['上涨','暴涨','大涨','突破','盈利','增持','利好','超预期',
+              '创新高','回购','扩张','走强','反弹','拉升','获批','放量']
+BEAR_WORDS = ['下跌','暴跌','大跌','崩盘','亏损','违约','制裁','警告',
+              '风险','危机','下调','减持','利空','走弱','下滑','缩量',
+              '调查','罚款','退市','暂停']
+
+def score_title(title):
+    bull = sum(1 for w in BULL_WORDS if w in title)
+    bear = sum(1 for w in BEAR_WORDS if w in title)
+    if bull == 0 and bear == 0:
+        return None, 0
+    if bull > bear:
+        return 'Bullish', bull
+    elif bear > bull:
+        return 'Bearish', bear
+    else:
+        return None, 0  # 中性，跳过
+
+def fetch_sina_news():
+    """从新浪财经滚动新闻获取A股市场信号，返回最多5条强情绪新闻"""
+    url = ('https://feed.mix.sina.com.cn/api/roll/get'
+           '?pageid=153&lid=2516&k=&num=50&page=1')
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+        'Referer':    'https://finance.sina.com.cn',
+    }
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=10) as r:
+        data = json.loads(r.read().decode('utf-8', errors='replace'))
+
+    items = data.get('result', {}).get('data', [])
+    scored = []
+    for item in items:
+        title = item.get('title', '')
+        url_  = item.get('url', '')
+        ctime = item.get('ctime', '')
+        sentiment, strength = score_title(title)
+        if sentiment:
+            scored.append({
+                'title':     title,
+                'url':       url_,
+                'source':    '新浪财经',
+                'sentiment': sentiment,
+                'score':     strength if sentiment == 'Bullish' else -strength,
+                'time':      ctime[:16] if ctime else '',
+            })
+
+    # 按强度绝对值排序，取前5
+    scored.sort(key=lambda x: abs(x['score']), reverse=True)
+    return scored[:5]
+
+# ──────────────────────────────────────────
+#  新浪财经行情
 # ──────────────────────────────────────────
 SINA_HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
@@ -184,7 +223,7 @@ def fetch_sina_history(sym):
     m = re.search(r'\(\[(.*)\]\)', raw, re.DOTALL)
     if not m:
         raise RuntimeError('PARSE_ERROR')
-    items  = sorted(json.loads('[' + m.group(1) + ']'), key=lambda x: x.get('day', ''))
+    items  = sorted(json.loads('[' + m.group(1) + ']'), key=lambda x: x.get('day',''))
     closes = [float(x['close']) for x in items]
     if len(closes) < 2:
         raise RuntimeError('INSUFFICIENT')
@@ -197,20 +236,18 @@ def fetch_sina_history(sym):
 # ──────────────────────────────────────────
 def run_us():
     keys = AV_KEYS
-    results = []
+    results, index_results = [], []
     success = 0
 
     total = len(US_SECTORS)
     print(f'\n▶ 美股板块 ({total})  开始: {datetime.now().strftime("%H:%M:%S")}')
-    print(f'  使用 {len(keys)} 个 Key 交替请求')
-
     for i, s in enumerate(US_SECTORS):
         api_key = keys[i % len(keys)]
         chg1d = chg5d = price = None; spark = []
         try:
             chg1d, chg5d, spark, price = fetch_av_daily(s['sym'], api_key)
             success += 1
-            print(f'  [{i+1:2d}/{total}] {s["name"]:6s} ({s["sym"]:5s}) 今日 {chg1d:+.2f}%  5日 {chg5d:+.2f}%  [Key{i%2+1}]')
+            print(f'  [{i+1:2d}/{total}] {s["name"]:6s} ({s["sym"]:5s}) 今日 {chg1d:+.2f}%  5日 {chg5d:+.2f}%')
         except RuntimeError as e:
             if 'RATE_LIMIT' in str(e):
                 other = keys[(i+1) % len(keys)]
@@ -224,10 +261,9 @@ def run_us():
                 print(f'  [{i+1:2d}/{total}] {s["sym"]} ✗ {e}')
         except Exception as e:
             print(f'  [{i+1:2d}/{total}] {s["sym"]} ✗ {e}')
-        results.append({**s, 'chg1d': chg1d, 'chg5d': chg5d, 'spark': spark, 'price': price})
+        results.append({**s, 'chg1d':chg1d, 'chg5d':chg5d, 'spark':spark, 'price':price})
         if i < total - 1: time.sleep(AV_DELAY)
 
-    index_results = []
     print(f'\n▶ 美股大盘 ({len(US_INDEX)})')
     for i, s in enumerate(US_INDEX):
         api_key = keys[i % len(keys)]
@@ -237,26 +273,23 @@ def run_us():
             print(f'  {s["name"]:6s} ({s["sym"]}) 今日 {chg1d:+.2f}%  5日 {chg5d:+.2f}%')
         except Exception as e:
             print(f'  {s["sym"]} ✗ {e}')
-        index_results.append({**s, 'chg1d': chg1d, 'chg5d': chg5d, 'spark': spark, 'price': price})
+        index_results.append({**s, 'chg1d':chg1d, 'chg5d':chg5d, 'spark':spark, 'price':price})
         if i < len(US_INDEX) - 1: time.sleep(AV_DELAY)
 
     news = []
-    print(f'\n▶ 市场新闻')
+    print(f'\n▶ 美股新闻')
     try:
-        news = fetch_news(keys[0])
+        news = fetch_av_news(keys[0])
         print(f'  获取 {len(news)} 条')
         for n in news:
             print(f'  [{n["sentiment"]}] {n["title"][:70]}')
     except Exception as e:
-        print(f'  新闻获取失败: {e}')
+        print(f'  新闻失败: {e}')
 
     payload = {
-        'market': 'us',
-        'updated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        'updated_ts': int(time.time() * 1000),
-        'sectors': results,
-        'index': index_results,
-        'news': news,
+        'market': 'us', 'updated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'updated_ts': int(time.time()*1000),
+        'sectors': results, 'index': index_results, 'news': news,
     }
     path = os.path.join(SCRIPT_DIR, 'us_sectors_data.json')
     with open(path, 'w', encoding='utf-8') as f:
@@ -267,7 +300,7 @@ def run_us():
 #  Run CN
 # ──────────────────────────────────────────
 def run_cn():
-    results = []
+    results, index_results = [], []
     success = 0
 
     total = len(CN_SECTORS)
@@ -289,10 +322,9 @@ def run_cn():
                   (f'  5日 {chg5d:+.2f}%' if chg5d else ''))
         else:
             print(f'  [{i+1:2d}/{total}] {s["name"]:6s} ({sym}) ✗')
-        results.append({**s, 'chg1d': chg1d, 'chg5d': chg5d, 'spark': spark, 'price': price})
+        results.append({**s, 'chg1d':chg1d, 'chg5d':chg5d, 'spark':spark, 'price':price})
         time.sleep(0.3)
 
-    index_results = []
     print(f'\n▶ A股大盘 ({len(CN_INDEX)})')
     for s in CN_INDEX:
         sym = s['sym']
@@ -308,15 +340,23 @@ def run_cn():
         if chg1d is not None:
             print(f'  {s["name"]:6s} ({sym}) 今日 {chg1d:+.2f}%' +
                   (f'  5日 {chg5d:+.2f}%' if chg5d else ''))
-        index_results.append({**s, 'chg1d': chg1d, 'chg5d': chg5d, 'spark': spark, 'price': price})
+        index_results.append({**s, 'chg1d':chg1d, 'chg5d':chg5d, 'spark':spark, 'price':price})
         time.sleep(0.3)
 
+    news = []
+    print(f'\n▶ A股新闻')
+    try:
+        news = fetch_sina_news()
+        print(f'  获取 {len(news)} 条')
+        for n in news:
+            print(f'  [{n["sentiment"]}] {n["title"][:50]}')
+    except Exception as e:
+        print(f'  新闻失败: {e}')
+
     payload = {
-        'market': 'cn',
-        'updated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        'updated_ts': int(time.time() * 1000),
-        'sectors': results,
-        'index': index_results,
+        'market': 'cn', 'updated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        'updated_ts': int(time.time()*1000),
+        'sectors': results, 'index': index_results, 'news': news,
     }
     path = os.path.join(SCRIPT_DIR, 'cn_sectors_data.json')
     with open(path, 'w', encoding='utf-8') as f:

@@ -16,22 +16,18 @@
 body{background:var(--bg);font-family:-apple-system,"PingFang SC","Helvetica Neue",sans-serif;min-height:100vh;display:flex;justify-content:center;}
 .page{width:100%;max-width:430px;padding:18px 15px 40px;}
 
-/* header */
+/* ── header ── */
 .hrow1{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.hrow2{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:6px;}
+.hrow2{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:6px;}
 .title-wrap{display:flex;align-items:center;gap:7px;}
 .title-bar{width:4px;height:22px;background:var(--accent);border-radius:2px;}
 .title-txt{font-size:20px;font-weight:700;color:var(--txt);letter-spacing:-.3px;}
-
 .mkt-toggle{display:flex;background:#e5e7eb;border-radius:20px;padding:2px;gap:1px;}
 .mkt-btn{padding:4px 12px;border-radius:18px;border:none;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;}
 .mkt-btn.active{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.13);}
 .mkt-btn.us.active{color:#1a6fff;} .mkt-btn.cn.active{color:#e8312a;}
 .mkt-btn:not(.active){background:transparent;color:#888;}
-
-.share-btn{background:var(--pink);color:#fff;border:none;border-radius:20px;padding:6px 16px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(255,107,129,.35);letter-spacing:1px;transition:transform .1s;}
-.share-btn:active{transform:scale(.96);}
-
+.share-btn{background:var(--pink);color:#fff;border:none;border-radius:20px;padding:6px 16px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 2px 8px rgba(255,107,129,.35);letter-spacing:1px;}
 .date-status{display:flex;align-items:center;gap:7px;}
 .date-txt{font-size:13px;font-weight:600;color:var(--txt);}
 .sbadge{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;}
@@ -40,36 +36,34 @@ body{background:var(--bg);font-family:-apple-system,"PingFang SC","Helvetica Neu
 .open .sdot{background:var(--green);animation:pulse 2s ease-in-out infinite;}
 .close .sdot{background:var(--muted);}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.82)}}
-
 .view-tabs{display:flex;border:1.5px solid #ddd;border-radius:8px;overflow:hidden;}
 .vtab{padding:4px 11px;font-size:12px;font-weight:500;border:none;cursor:pointer;background:#fff;color:#666;white-space:nowrap;}
 .vtab.active{background:var(--txt);color:#fff;}
 .vtab+.vtab{border-left:1.5px solid #ddd;}
-
 .refresh-btn{background:none;border:1.5px solid #ddd;border-radius:16px;padding:4px 11px;font-size:12px;color:#666;cursor:pointer;display:flex;align-items:center;gap:3px;white-space:nowrap;}
-.refresh-btn:disabled{opacity:.4;cursor:not-allowed;}
 .ricon{display:inline-block;}
 .refresh-btn.spin .ricon{animation:spin .9s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* state panels */
+/* ── 大盘行 ── */
+.index-row{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px;}
+.index-row::-webkit-scrollbar{display:none;}
+.idx-card{background:var(--card);border-radius:12px;padding:10px 12px;flex-shrink:0;min-width:80px;box-shadow:var(--sh);}
+.idx-name{font-size:11px;color:var(--muted);margin-bottom:3px;}
+.idx-val{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;}
+.idx-chg{font-size:11px;font-variant-numeric:tabular-nums;margin-top:1px;}
+.cu{color:var(--up);} .cd{color:var(--down);} .cm{color:var(--muted);}
+
+/* ── state ── */
 .state-panel{background:var(--card);border-radius:16px;padding:24px 18px;margin-bottom:12px;box-shadow:var(--sh);text-align:center;}
 .state-icon{font-size:32px;margin-bottom:12px;}
 .state-title{font-size:15px;font-weight:700;color:var(--txt);margin-bottom:6px;}
 .state-body{font-size:13px;color:var(--muted);line-height:1.7;}
 .state-body code{background:#f5f5f5;padding:2px 6px;border-radius:4px;font-size:12px;color:#333;}
 
-.loading-panel{background:var(--card);border-radius:16px;padding:20px 18px;margin-bottom:12px;box-shadow:var(--sh);}
-.lhdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
-.ltitle{font-size:14px;font-weight:600;}
-.lcount{font-size:12px;color:var(--muted);}
-.ptrack{height:4px;background:#eee;border-radius:2px;overflow:hidden;margin-bottom:7px;}
-.pfill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--pink));border-radius:2px;transition:width .4s;}
-.ldetail{font-size:12px;color:var(--muted);}
-
-/* today grid */
+/* ── today grid ── */
 .sector-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.sector-card{background:var(--card);border-radius:var(--r);padding:12px 10px;display:flex;align-items:center;gap:7px;box-shadow:var(--sh);cursor:default;transition:transform .15s,box-shadow .15s;}
+.sector-card{background:var(--card);border-radius:var(--r);padding:12px 10px;display:flex;align-items:center;gap:7px;box-shadow:var(--sh);transition:transform .15s,box-shadow .15s;}
 .sector-card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.09);}
 .s-icon{font-size:21px;line-height:1;flex-shrink:0;width:26px;text-align:center;}
 .s-body{flex:1;min-width:0;}
@@ -79,12 +73,11 @@ body{background:var(--bg);font-family:-apple-system,"PingFang SC","Helvetica Neu
 .s-spark{flex-shrink:0;}
 .up .s-arrow,.up .s-val{color:var(--up);}
 .down .s-arrow,.down .s-val{color:var(--down);}
-.divider{grid-column:1/-1;height:1px;background:linear-gradient(90deg,transparent,#ddd 20%,#ddd 80%,transparent);margin:3px 0;}
+.sec-label{grid-column:1/-1;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.5px;padding:6px 2px 2px;}
 
-/* 5-day list */
+/* ── 5-day list ── */
 .fd-list{display:flex;flex-direction:column;gap:8px;}
-.fd-card{background:var(--card);border-radius:var(--r);padding:11px 12px;display:flex;align-items:center;gap:9px;box-shadow:var(--sh);transition:transform .15s,box-shadow .15s;}
-.fd-card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.09);}
+.fd-card{background:var(--card);border-radius:var(--r);padding:11px 12px;display:flex;align-items:center;gap:9px;box-shadow:var(--sh);}
 .fd-icon{font-size:20px;width:26px;text-align:center;flex-shrink:0;}
 .fd-meta{flex:1;min-width:0;}
 .fd-name{font-size:13px;font-weight:600;color:var(--txt);}
@@ -92,12 +85,22 @@ body{background:var(--bg);font-family:-apple-system,"PingFang SC","Helvetica Neu
 .fd-nums{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;min-width:56px;}
 .fd-5d{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;}
 .fd-1d{font-size:11px;font-variant-numeric:tabular-nums;}
-.cu{color:var(--up);} .cd{color:var(--down);} .cm{color:var(--muted);}
-.sec-label{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.5px;padding:4px 2px 2px;}
+.fd-label{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.5px;padding:6px 2px 2px;}
 
-/* footer */
+/* ── 市场信号 ── */
+.news-section{margin-top:16px;}
+.news-title{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.news-card{background:var(--card);border-radius:12px;padding:11px 13px;margin-bottom:8px;box-shadow:var(--sh);display:flex;gap:10px;align-items:flex-start;text-decoration:none;}
+.news-card:hover{box-shadow:0 3px 10px rgba(0,0,0,.1);}
+.news-badge{flex-shrink:0;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;margin-top:1px;}
+.badge-bull{background:#fef0f0;color:var(--up);}
+.badge-bear{background:#f0faf5;color:var(--down);}
+.news-body{flex:1;min-width:0;}
+.news-headline{font-size:12.5px;color:var(--txt);line-height:1.5;font-weight:500;}
+.news-meta{font-size:10px;color:var(--muted);margin-top:3px;}
+
+/* ── footer ── */
 .footer{margin-top:14px;text-align:center;font-size:11px;color:var(--muted);line-height:1.9;}
-.usage-chip{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:10px;padding:3px 10px;font-size:11px;color:#888;}
 </style>
 </head>
 <body>
@@ -126,15 +129,17 @@ body{background:var(--bg);font-family:-apple-system,"PingFang SC","Helvetica Neu
     </div>
     <div class="view-tabs">
       <button class="vtab active" onclick="switchView('today')">今日</button>
-      <button class="vtab" onclick="switchView('5day')">5日走势</button>
+      <button class="vtab" onclick="switchView('5day')">5日</button>
     </div>
     <button class="refresh-btn" id="refresh-btn" onclick="doRefresh()">
       <span class="ricon">↻</span> 刷新
     </button>
   </div>
 
+  <!-- 大盘指数行 -->
+  <div id="index-row" class="index-row"></div>
 
-  <!-- State (no data / error) -->
+  <!-- State -->
   <div id="state-panel" class="state-panel" style="display:none">
     <div class="state-icon" id="state-icon">📂</div>
     <div class="state-title" id="state-title"></div>
@@ -147,87 +152,36 @@ body{background:var(--bg);font-family:-apple-system,"PingFang SC","Helvetica Neu
   <!-- 5-day list -->
   <div id="fiveday-view" class="fd-list" style="display:none"></div>
 
+  <!-- 市场信号（仅美股） -->
+  <div id="news-section" class="news-section" style="display:none">
+    <div class="news-title">📡 市场信号</div>
+    <div id="news-list"></div>
+  </div>
+
   <div class="footer" id="footer" style="display:none">
     <div id="updated-time"></div>
-    <div id="data-source" style="margin-top:2px"></div>
+    <div id="data-source"></div>
   </div>
 
 </div>
 
 <script>
-// ═══════════════════════════
-//  Sector definitions
-// ═══════════════════════════
-const US = [
-  {name:'数字货币',  icon:'🏛️', sym:'BITO' },
-  {name:'AI应用',   icon:'✨',  sym:'AIQ'  },
-  {name:'核电',     icon:'☢️',  sym:'URA'  },
-  {name:'商业航天', icon:'🚀',  sym:'ARKX' },
-  {name:'银行/金融',icon:'🏦',  sym:'XLF'  },
-  {name:'AI安全',   icon:'🔐',  sym:'BUG'  },
-  {name:'汽车',     icon:'🚙',  sym:'DRIV' },
-  {name:'有色金属', icon:'🟡',  sym:'XME'  },
-  {name:'跨境支付', icon:'💳',  sym:'IPAY' },
-  {name:'稀土永磁', icon:'🧲',  sym:'REMX' },
-  {name:'电力',     icon:'🔌',  sym:'XLU'  },
-  {name:'军工',     icon:'🛡️',  sym:'ITA'  },
-  {name:'油气',     icon:'🛢️',  sym:'XLE'  },
-  {name:'AI算力',   icon:'🖥️',  sym:'NVDA' },
-  {name:'零售',     icon:'🛒',  sym:'XRT'  },
-  {name:'医药',     icon:'💊',  sym:'IBB'  },
-  {name:'光伏',     icon:'☀️',  sym:'TAN'  },
-  {name:'化工',     icon:'🧪',  sym:'XLB'  },
-  {name:'食品饮料', icon:'🍽️',  sym:'XLP'  },
-  {name:'半导体',   icon:'💿',  sym:'SOXX' },
-  {name:'存储芯片', icon:'💾',  sym:'MU'   },
-  {name:'光通信',   icon:'💡',  sym:'FIVG' },
-];
+const TOP_N = 10;  // 领涨/领跌各显示前N名
+const WD = ['日','一','二','三','四','五','六'];
 
-const CN = [
-  {name:'半导体',   icon:'💿',  sym:'sh688981'},
-  {name:'AI应用',   icon:'✨',  sym:'sh515070'},
-  {name:'新能源车', icon:'⚡',  sym:'sh159995'},
-  {name:'光伏',     icon:'☀️',  sym:'sh515790'},
-  {name:'储能',     icon:'🔋',  sym:'sh561910'},
-  {name:'医药',     icon:'💊',  sym:'sh512690'},
-  {name:'消费',     icon:'🛍️',  sym:'sh159928'},
-  {name:'食品饮料', icon:'🍽️',  sym:'sh515170'},
-  {name:'军工',     icon:'🛡️',  sym:'sh512660'},
-  {name:'金融',     icon:'🏦',  sym:'sh510230'},
-  {name:'地产',     icon:'🏢',  sym:'sh512200'},
-  {name:'有色金属', icon:'🟡',  sym:'sh512400'},
-  {name:'化工',     icon:'🧪',  sym:'sh516020'},
-  {name:'科技互联', icon:'💻',  sym:'sh515030'},
-];
-
-// ═══════════════════════════
-//  State
-// ═══════════════════════════
 let market = 'us', view = 'today';
 let store = {us: null, cn: null};
 
-// ═══════════════════════════
-//  Market hours
-// ═══════════════════════════
+// ── Market hours ──
 function isOpen(mkt) {
   const tz  = mkt === 'us' ? 'America/New_York' : 'Asia/Shanghai';
   const loc  = new Date(new Date().toLocaleString('en-US', {timeZone: tz}));
-  const day  = loc.getDay();
-  const mins = loc.getHours()*60 + loc.getMinutes();
-  if (mkt === 'us') {
-    return day>=1 && day<=5 && mins>=570 && mins<960;  // 9:30-16:00 ET
-  } else {
-    // A股交易时间：9:30-11:30 和 13:00-15:00，排除午休
-    const morning   = mins>=570  && mins<690;   // 9:30-11:30
-    const afternoon = mins>=780  && mins<900;   // 13:00-15:00
-    return day>=1 && day<=5 && (morning || afternoon);
-  }
+  const day  = loc.getDay(), mins = loc.getHours()*60 + loc.getMinutes();
+  if (mkt === 'us') return day>=1 && day<=5 && mins>=570 && mins<960;
+  const morning = mins>=570 && mins<690, afternoon = mins>=780 && mins<900;
+  return day>=1 && day<=5 && (morning || afternoon);
 }
 
-// ═══════════════════════════
-//  Date/status display
-// ═══════════════════════════
-const WD = ['日','一','二','三','四','五','六'];
 function updateHeader() {
   const d = new Date();
   document.getElementById('date-txt').textContent =
@@ -238,9 +192,7 @@ function updateHeader() {
   document.getElementById('mkt-label').textContent = open ? '交易中' : '已收盘';
 }
 
-// ═══════════════════════════
-//  Helpers
-// ═══════════════════════════
+// ── Helpers ──
 function show(id, on) { document.getElementById(id).style.display = on ? '' : 'none'; }
 
 function fmtPct(v) {
@@ -251,16 +203,10 @@ function fmtPct(v) {
 
 function sparkSVG(prices, isUp, W=46, H=20) {
   if (!prices||prices.length<2) return '';
-  const min=Math.min(...prices), max=Math.max(...prices);
-  const rng=(max-min)||Math.abs(min)*0.01||1;
-  const pts = prices.map((v,i)=>{
-    const x=(2+(i/(prices.length-1))*(W-4)).toFixed(1);
-    const y=(2+(1-(v-min)/rng)*(H-4)).toFixed(1);
-    return `${x},${y}`;
-  }).join(' ');
-  const col = isUp ? 'var(--up)' : 'var(--down)';
+  const mn=Math.min(...prices), mx=Math.max(...prices), rng=(mx-mn)||Math.abs(mn)*0.01||1;
+  const pts = prices.map((v,i)=>`${(2+(i/(prices.length-1))*(W-4)).toFixed(1)},${(2+(1-(v-mn)/rng)*(H-4)).toFixed(1)}`).join(' ');
   return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="display:block">
-    <polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
+    <polyline points="${pts}" fill="none" stroke="${isUp?'var(--up)':'var(--down)'}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
   </svg>`;
 }
 
@@ -272,42 +218,65 @@ function showState(icon, title, body) {
 }
 function clearState() { show('state-panel', false); }
 
-// ═══════════════════════════
-//  Render
-// ═══════════════════════════
+// ── Render index row ──
+function renderIndex(indexData) {
+  if (!indexData || !indexData.length) { document.getElementById('index-row').innerHTML = ''; return; }
+  document.getElementById('index-row').innerHTML = indexData.map(s => {
+    const {txt, cls} = fmtPct(s.chg1d);
+    const price = s.price != null ? s.price.toLocaleString() : '--';
+    return `<div class="idx-card">
+      <div class="idx-name">${s.icon} ${s.name}</div>
+      <div class="idx-val">${price}</div>
+      <div class="idx-chg ${cls}">${txt}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── Render today ──
 function renderToday(sectors) {
   const valid  = sectors.filter(s=>s.chg1d!=null);
   const sorted = [...valid].sort((a,b)=>b.chg1d-a.chg1d);
-  const ups    = sorted.filter(s=>s.chg1d>=0);
-  const downs  = sorted.filter(s=>s.chg1d<0);
+  const ups    = sorted.filter(s=>s.chg1d>=0).slice(0, TOP_N);
+  const downs  = sorted.filter(s=>s.chg1d<0).slice(-TOP_N);
   const parts  = [];
-  ups.forEach(s   => parts.push(todayCard(s)));
-  if (ups.length && downs.length) parts.push('<div class="divider"></div>');
-  downs.forEach(s => parts.push(todayCard(s)));
+  if (ups.length) {
+    parts.push(`<div class="sec-label">▲ 领涨 TOP${ups.length}</div>`);
+    ups.forEach(s => parts.push(todayCard(s)));
+  }
+  if (downs.length) {
+    parts.push(`<div class="sec-label">▼ 领跌 TOP${downs.length}</div>`);
+    downs.forEach(s => parts.push(todayCard(s)));
+  }
   document.getElementById('today-view').innerHTML = parts.join('');
 }
 
 function todayCard(s) {
   const {txt,arrow,dir} = fmtPct(s.chg1d);
-  const spark = sparkSVG(s.spark, s.chg1d>=0);
   return `<div class="sector-card ${dir}">
     <span class="s-icon">${s.icon}</span>
     <div class="s-body">
       <div class="s-name">${s.name}</div>
       <div class="s-chg"><span class="s-arrow">${arrow}</span><span class="s-val">${txt}</span></div>
     </div>
-    <div class="s-spark">${spark}</div>
+    <div class="s-spark">${sparkSVG(s.spark, s.chg1d>=0)}</div>
   </div>`;
 }
 
+// ── Render 5-day ──
 function renderFiveDay(sectors) {
   const valid  = sectors.filter(s=>s.chg5d!=null);
   const sorted = [...valid].sort((a,b)=>b.chg5d-a.chg5d);
-  const ups    = sorted.filter(s=>s.chg5d>=0);
-  const downs  = sorted.filter(s=>s.chg5d<0);
+  const ups    = sorted.filter(s=>s.chg5d>=0).slice(0, TOP_N);
+  const downs  = sorted.filter(s=>s.chg5d<0).slice(-TOP_N);
   const parts  = [];
-  if (ups.length)   { parts.push('<div class="sec-label">5日领涨</div>'); ups.forEach(s=>parts.push(fdCard(s))); }
-  if (downs.length) { parts.push('<div class="sec-label" style="margin-top:6px">5日领跌</div>'); downs.forEach(s=>parts.push(fdCard(s))); }
+  if (ups.length) {
+    parts.push(`<div class="fd-label">▲ 5日领涨 TOP${ups.length}</div>`);
+    ups.forEach(s => parts.push(fdCard(s)));
+  }
+  if (downs.length) {
+    parts.push(`<div class="fd-label">▼ 5日领跌 TOP${downs.length}</div>`);
+    downs.forEach(s => parts.push(fdCard(s)));
+  }
   document.getElementById('fiveday-view').innerHTML = parts.join('');
 }
 
@@ -321,14 +290,13 @@ function rotLabel(s) {
 
 function fdCard(s) {
   const f5=fmtPct(s.chg5d), f1=fmtPct(s.chg1d);
-  const spark=sparkSVG(s.spark,s.chg5d>=0,52,22);
   return `<div class="fd-card">
     <span class="fd-icon">${s.icon}</span>
     <div class="fd-meta">
       <div class="fd-name">${s.name}</div>
       <div class="fd-sym">${s.sym}${rotLabel(s)}</div>
     </div>
-    <div style="flex-shrink:0">${spark}</div>
+    <div style="flex-shrink:0">${sparkSVG(s.spark,s.chg5d>=0,52,22)}</div>
     <div class="fd-nums">
       <span class="fd-5d ${f5.cls}">${f5.arrow}${f5.txt}</span>
       <span class="fd-1d ${f1.cls}">今日 ${f1.txt}</span>
@@ -336,79 +304,77 @@ function fdCard(s) {
   </div>`;
 }
 
+// ── Render news ──
+function renderNews(news) {
+  if (!news || !news.length) { show('news-section', false); return; }
+  const html = news.map(n => {
+    const bull = n.sentiment === 'Bullish';
+    const badge = bull
+      ? '<span class="news-badge badge-bull">利好</span>'
+      : '<span class="news-badge badge-bear">利空</span>';
+    const time = n.time ? `${n.time.slice(0,4)}-${n.time.slice(4,6)}-${n.time.slice(6,8)} ${n.time.slice(8,10)}:${n.time.slice(10,12)}` : '';
+    return `<a class="news-card" href="${n.url}" target="_blank" rel="noopener">
+      ${badge}
+      <div class="news-body">
+        <div class="news-headline">${n.title}</div>
+        <div class="news-meta">${n.source}  ${time}</div>
+      </div>
+    </a>`;
+  }).join('');
+  document.getElementById('news-list').innerHTML = html;
+  show('news-section', true);
+}
+
+// ── Render footer ──
 function renderFooter(updatedAt, source) {
-  document.getElementById('updated-time').textContent  = `更新于 ${updatedAt}`;
-  document.getElementById('data-source').textContent   = source;
+  document.getElementById('updated-time').textContent = `更新于 ${updatedAt}`;
+  document.getElementById('data-source').textContent  = source;
   show('footer', true);
 }
 
+// ── Apply current view ──
 function applyView() {
   const data = store[market];
   show('today-view',   view==='today');
   show('fiveday-view', view==='5day');
   if (!data) return;
-  if (view==='today')  renderToday(data);
-  if (view==='5day')   renderFiveDay(data);
+  renderIndex(data.index);
+  if (view==='today')  renderToday(data.sectors);
+  if (view==='5day')   renderFiveDay(data.sectors);
+  // 新闻只在美股今日视图显示
+  if (market==='us' && view==='today') renderNews(data.news);
+  else show('news-section', false);
 }
 
-// ═══════════════════════════
-//  Load US data from JSON file
-//  (written by fetch_sectors.py)
-// ═══════════════════════════
-async function loadUSFromFile() {
+// ── Load from JSON file ──
+async function loadFromFile(mkt) {
+  const file = mkt === 'us' ? 'us_sectors_data.json' : 'cn_sectors_data.json';
+  const source = mkt === 'us'
+    ? 'ETF代理行情 · Alpha Vantage · 每日08:00自动更新'
+    : 'A股ETF · 新浪财经 · 交易时间每10分钟更新';
   try {
-    const res  = await fetch('us_sectors_data.json?t=' + Date.now());
+    const res  = await fetch(file + '?t=' + Date.now());
     if (!res.ok) throw new Error('not found');
     const json = await res.json();
-    store.us = json.sectors;
+    store[mkt] = json;
     applyView();
-    renderFooter(
-      json.updated_at,
-      'ETF代理行情 · 每日08:00自动更新 · Alpha Vantage'
-    );
+    renderFooter(json.updated_at, source);
     clearState();
   } catch(e) {
-    showState('📂', '暂无美股数据',
-      `请先运行拉取脚本：<br><code>python3 fetch_sectors.py us</code><br>
-       或等待每日 08:00 定时任务自动执行。`);
+    showState('📂', `暂无${mkt==='us'?'美股':'A股'}数据`,
+      `请先运行：<br><code>python3 fetch_sectors.py ${mkt}</code>`);
   }
 }
 
-// ═══════════════════════════
-//  Load CN data from local file
-//  (written by fetch_sectors.py)
-// ═══════════════════════════
-async function loadCNFromFile() {
-  try {
-    const res  = await fetch('cn_sectors_data.json?t=' + Date.now());
-    if (!res.ok) throw new Error('not found');
-    const json = await res.json();
-    const ageMin = (Date.now() - json.updated_ts) / 60000;
-    store.cn = json.sectors;
-    applyView();
-    // Show staleness hint if market is open and data is >15 min old
-    const stale = isOpen('cn') && ageMin > 15 ? ` · ${Math.floor(ageMin)}分钟前` : '';
-    renderFooter(json.updated_at, `A股ETF行情 · 新浪财经${stale}`);
-    clearState();
-  } catch(e) {
-    showState('📂', '暂无A股数据',
-      `请确认 crontab 已配置，或手动运行：<br><code>python3 fetch_sectors.py cn</code>`);
-  }
-}
-
-// ═══════════════════════════
-//  Switch market / view
-// ═══════════════════════════
+// ── Switch ──
 function switchMarket(m) {
   market = m;
   document.querySelectorAll('.mkt-btn').forEach(b=>b.classList.toggle('active', b.classList.contains(m)));
   document.getElementById('page-title').textContent = m==='us' ? '美股题材' : 'A股题材';
   updateHeader();
-  show('today-view',   false);
-  show('fiveday-view', false);
+  show('today-view', false); show('fiveday-view', false); show('news-section', false);
   clearState();
-  if (m==='us') loadUSFromFile();
-  else          loadCNFromFile();
+  loadFromFile(m);
 }
 
 function switchView(v) {
@@ -419,26 +385,18 @@ function switchView(v) {
 }
 
 function doRefresh() {
-  clearState();
   store[market] = null;
-  show('today-view',false); show('fiveday-view',false);
-  if (market==='us') loadUSFromFile();
-  else               loadCNFromFile();
+  show('today-view',false); show('fiveday-view',false); show('news-section',false);
+  clearState();
+  loadFromFile(market);
 }
 
-// ═══════════════════════════
-//  Init
-// ═══════════════════════════
+// ── Init ──
 document.addEventListener('DOMContentLoaded', ()=>{
   updateHeader();
   setInterval(updateHeader, 60000);
-  loadUSFromFile();
-
-  // 每10分钟重新读文件（配合 crontab 的10分钟刷新节奏）
-  // 只有在A股视图且文件有更新时才会看到变化
-  setInterval(()=>{
-    if (market === 'cn') loadCNFromFile();
-  }, 10 * 60 * 1000);
+  loadFromFile('us');
+  setInterval(()=>{ if (market==='cn') loadFromFile('cn'); }, 10*60*1000);
 });
 </script>
 </body>

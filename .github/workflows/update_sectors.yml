@@ -59,17 +59,11 @@ jobs:
         run: python3 fetch_sectors.py us
 
       - name: Fetch CN sectors
-        if: steps.decide.outputs.fetch_cn == 'true'
-        env:
-          AV_KEY_1: ${{ secrets.AV_KEY_1 }}
-          AV_KEY_2: ${{ secrets.AV_KEY_2 }}
-        run: python3 fetch_sectors.py cn
-
-      - name: Commit and push data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
           git add us_sectors_data.json cn_sectors_data.json
           git diff --staged --quiet || git commit -m "data: update $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push origin HEAD:main --force
+
+     

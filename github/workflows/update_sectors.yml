@@ -1,0 +1,75 @@
+name: Update Sectors Data
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+    - cron: '*/10 1,2 * * 1-5'
+    - cron: '*/10 5,6 * * 1-5'
+    - cron: '0 7 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Determine what to fetch
+        id: decide
+        run: |
+          HOUR=$(date -u +%H)
+          MIN=$(date -u +%M)
+          TOTAL_MIN=$((HOUR * 60 + MIN))
+          DOW=$(date -u +%u)
+          BJ_MIN=$(( (TOTAL_MIN + 480) % 1440 ))
+          BJ_HOUR=$(( BJ_MIN / 60 ))
+          echo "UTC=$HOUR:$MIN, BJ_HOUR=$BJ_HOUR, DOW=$DOW"
+          if [ "$BJ_HOUR" -eq 8 ] && [ "$((BJ_MIN % 60))" -lt 15 ]; then
+            echo "fetch_us=true" >> $GITHUB_OUTPUT
+          else
+            echo "fetch_us=false" >> $GITHUB_OUTPUT
+          fi
+          if [ "$DOW" -le 5 ]; then
+            if ( [ "$BJ_MIN" -ge 570 ] && [ "$BJ_MIN" -lt 690 ] ) || \
+               ( [ "$BJ_MIN" -ge 780 ] && [ "$BJ_MIN" -le 900 ] ); then
+              echo "fetch_cn=true" >> $GITHUB_OUTPUT
+            else
+              echo "fetch_cn=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "fetch_cn=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Fetch US sectors
+        if: steps.decide.outputs.fetch_us == 'true'
+        env:
+          AV_KEY_1: ${{ secrets.AV_KEY_1 }}
+          AV_KEY_2: ${{ secrets.AV_KEY_2 }}
+        run: python3 fetch_sectors.py us
+
+      - name: Fetch CN sectors
+        if: steps.decide.outputs.fetch_cn == 'true'
+        env:
+          AV_KEY_1: ${{ secrets.AV_KEY_1 }}
+          AV_KEY_2: ${{ secrets.AV_KEY_2 }}
+        run: python3 fetch_sectors.py cn
+
+      - name: Commit and push data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add us_sectors_data.json cn_sectors_data.json
+          git diff --staged --quiet || git commit -m "data: update $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push origin HEAD:main --force

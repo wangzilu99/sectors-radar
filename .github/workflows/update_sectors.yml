@@ -35,11 +35,7 @@ jobs:
           BJ_MIN=$(( (TOTAL_MIN + 480) % 1440 ))
           BJ_HOUR=$(( BJ_MIN / 60 ))
           echo "UTC=$HOUR:$MIN, BJ_HOUR=$BJ_HOUR, DOW=$DOW"
-          if [ "$BJ_HOUR" -eq 8 ] && [ "$((BJ_MIN % 60))" -lt 15 ]; then
-            echo "fetch_us=true" >> $GITHUB_OUTPUT
-          else
-            echo "fetch_us=false" >> $GITHUB_OUTPUT
-          fi
+          echo "fetch_us=true" >> $GITHUB_OUTPUT
           if [ "$DOW" -le 5 ]; then
             if ( [ "$BJ_MIN" -ge 570 ] && [ "$BJ_MIN" -lt 690 ] ) || \
                ( [ "$BJ_MIN" -ge 780 ] && [ "$BJ_MIN" -le 900 ] ); then
@@ -59,11 +55,16 @@ jobs:
         run: python3 fetch_sectors.py us
 
       - name: Fetch CN sectors
+        if: steps.decide.outputs.fetch_cn == 'true'
+        env:
+          AV_KEY_1: ${{ secrets.AV_KEY_1 }}
+          AV_KEY_2: ${{ secrets.AV_KEY_2 }}
+        run: python3 fetch_sectors.py cn
+
+      - name: Commit and push data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add us_sectors_data.json cn_sectors_data.json
           git diff --staged --quiet || git commit -m "data: update $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push origin HEAD:main --force
-
-     

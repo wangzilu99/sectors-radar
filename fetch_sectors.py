@@ -15,6 +15,8 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 AV_KEYS = [
     os.environ.get('AV_KEY_1', '7WPA9V1S2FY7482L'),
     os.environ.get('AV_KEY_2', 'SD42Y3USGQ4DLABB'),
+    os.environ.get('AV_KEY_3', '49XAYQWGUVL3D14U'),
+    os.environ.get('AV_KEY_4', 'WB1J5B3CIWFU7Q17'),
 ]
 AV_DELAY = 13
 

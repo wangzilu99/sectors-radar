@@ -1,7 +1,7 @@
 {
   "market": "us",
-  "updated_at": "2026-09-16 05:27:52",
-  "updated_ts": 1789536472238,
+  "updated_at": "2026-09-16 08:46:55",
+  "updated_ts": 1789548415441,
   "sectors": [
     {
       "name": "数字货币",
@@ -292,46 +292,28 @@
       "name": "半导体",
       "icon": "💿",
       "sym": "SOXX",
-      "chg1d": 0.292,
-      "chg5d": -5.592,
-      "spark": [
-        532.0,
-        517.43,
-        527.07,
-        497.4,
-        498.85
-      ],
-      "price": 498.85
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "存储芯片",
       "icon": "💾",
       "sym": "MU",
-      "chg1d": 0.386,
-      "chg5d": -7.264,
-      "spark": [
-        1027.77,
-        977.41,
-        975.26,
-        924.03,
-        927.6
-      ],
-      "price": 927.6
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "光通信",
       "icon": "💡",
       "sym": "FIVG",
-      "chg1d": 0.56,
-      "chg5d": -2.044,
-      "spark": [
-        82.7591,
-        81.869,
-        83.5912,
-        80.7375,
-        81.19
-      ],
-      "price": 81.19
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     }
   ],
   "index": [

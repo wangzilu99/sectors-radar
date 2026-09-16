@@ -59,6 +59,8 @@ jobs:
         env:
           AV_KEY_1: ${{ secrets.AV_KEY_1 }}
           AV_KEY_2: ${{ secrets.AV_KEY_2 }}
+          AV_KEY_3: ${{ secrets.AV_KEY_3 }}
+          AV_KEY_4: ${{ secrets.AV_KEY_4 }}
         run: python3 fetch_sectors.py cn
 
       - name: Commit and push data

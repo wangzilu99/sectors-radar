@@ -1,7 +1,7 @@
 {
   "market": "us",
-  "updated_at": "2026-09-29 06:22:47",
-  "updated_ts": 1790662967331,
+  "updated_at": "2026-09-29 11:09:33",
+  "updated_ts": 1790680173835,
   "sectors": [
     {
       "name": "数字货币",
@@ -37,16 +37,10 @@
       "name": "核电",
       "icon": "☢️",
       "sym": "URA",
-      "chg1d": -1.907,
-      "chg5d": -6.631,
-      "spark": [
-        43.74,
-        41.99,
-        40.86,
-        40.91,
-        40.13
-      ],
-      "price": 40.13
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "商业航天",
@@ -67,46 +61,28 @@
       "name": "银行/金融",
       "icon": "🏦",
       "sym": "XLF",
-      "chg1d": -1.185,
-      "chg5d": -3.059,
-      "spark": [
-        54.8,
-        54.54,
-        54.53,
-        54.84,
-        54.19
-      ],
-      "price": 54.19
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "AI安全",
       "icon": "🔐",
       "sym": "BUG",
-      "chg1d": 1.543,
-      "chg5d": -1.24,
-      "spark": [
-        46.23,
-        47.12,
-        46.65,
-        44.71,
-        45.4
-      ],
-      "price": 45.4
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "汽车",
       "icon": "🚙",
       "sym": "DRIV",
-      "chg1d": -1.597,
-      "chg5d": -3.283,
-      "spark": [
-        34.3682,
-        33.7143,
-        33.4589,
-        33.655,
-        33.1176
-      ],
-      "price": 33.1176
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "有色金属",
@@ -142,16 +118,10 @@
       "name": "稀土永磁",
       "icon": "🧲",
       "sym": "REMX",
-      "chg1d": -3.285,
-      "chg5d": -8.254,
-      "spark": [
-        70.97,
-        68.76,
-        66.93,
-        66.66,
-        64.47
-      ],
-      "price": 64.47
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "电力",
@@ -187,16 +157,10 @@
       "name": "油气",
       "icon": "🛢️",
       "sym": "XLE",
-      "chg1d": 0.097,
-      "chg5d": -0.576,
-      "spark": [
-        61.78,
-        62.37,
-        62.6,
-        62.04,
-        62.1
-      ],
-      "price": 62.1
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "AI算力",
@@ -232,61 +196,37 @@
       "name": "医药",
       "icon": "💊",
       "sym": "IBB",
-      "chg1d": 0.448,
-      "chg5d": 1.714,
-      "spark": [
-        210.81,
-        206.6,
-        209.25,
-        209.77,
-        210.71
-      ],
-      "price": 210.71
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "光伏",
       "icon": "☀️",
       "sym": "TAN",
-      "chg1d": -2.406,
-      "chg5d": -7.943,
-      "spark": [
-        46.5,
-        45.05,
-        43.47,
-        44.06,
-        43.0
-      ],
-      "price": 43.0
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "化工",
       "icon": "🧪",
       "sym": "XLB",
-      "chg1d": -0.663,
-      "chg5d": -0.483,
-      "spark": [
-        50.53,
-        50.28,
-        49.68,
-        49.8,
-        49.47
-      ],
-      "price": 49.47
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "食品饮料",
       "icon": "🍽️",
       "sym": "XLP",
-      "chg1d": 0.268,
-      "chg5d": 0.439,
-      "spark": [
-        82.73,
-        82.43,
-        81.7,
-        82.06,
-        82.28
-      ],
-      "price": 82.28
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "半导体",
@@ -310,10 +250,16 @@
       "name": "光通信",
       "icon": "💡",
       "sym": "FIVG",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -1.694,
+      "chg5d": -2.164,
+      "spark": [
+        87.0165,
+        85.831,
+        85.6238,
+        86.3199,
+        84.8578
+      ],
+      "price": 84.8578
     }
   ],
   "index": [
@@ -321,38 +267,103 @@
       "name": "标普500",
       "icon": "🇺🇸",
       "sym": "SPY",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.744,
+      "chg5d": -1.02,
+      "spark": [
+        773.38,
+        767.81,
+        767.18,
+        771.35,
+        765.61
+      ],
+      "price": 765.61
     },
     {
       "name": "纳斯达克",
       "icon": "💻",
       "sym": "QQQ",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -1.071,
+      "chg5d": -0.666,
+      "spark": [
+        747.46,
+        741.21,
+        741.1,
+        744.5,
+        736.53
+      ],
+      "price": 736.53
     },
     {
       "name": "道琼斯",
       "icon": "🏛️",
       "sym": "DIA",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.671,
+      "chg5d": -1.108,
+      "spark": [
+        518.0,
+        514.3,
+        512.68,
+        517.49,
+        514.02
+      ],
+      "price": 514.02
     },
     {
       "name": "小盘股",
       "icon": "📊",
       "sym": "IWM",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.692,
+      "chg5d": -1.947,
+      "spark": [
+        287.21,
+        281.92,
+        281.66,
+        281.97,
+        280.02
+      ],
+      "price": 280.02
     }
   ],
-  "news": []
+  "news": [
+    {
+      "title": "Samsung and five affiliates put $1bn into KKR’s AI infrastructure firm",
+      "url": "https://thenextweb.com/news/samsung-1bn-helix-kkr-ai-infrastructure",
+      "source": "The Next Web",
+      "sentiment": "Bullish",
+      "score": 2,
+      "time": "20260929T101"
+    },
+    {
+      "title": "Transcript: Netflix Q2 2026 Earnings Conference Call",
+      "url": "https://www.benzinga.com/news/26/09/62041460/transcript-netflix-q2-2026-earnings-conference-call",
+      "source": "Benzinga",
+      "sentiment": "Bullish",
+      "score": 2,
+      "time": "20260929T080"
+    },
+    {
+      "title": "Wellington Management appoints State Street as transfer agent on HKEX Integrated Fund Platform",
+      "url": "https://fxnewsgroup.com/forex-news/institutional/wellington-management-appoints-state-street-as-transfer-agent-on-hkex-integrated-fund-platform/",
+      "source": "FX News Group",
+      "sentiment": "Bullish",
+      "score": 2,
+      "time": "20260929T074"
+    },
+    {
+      "title": "Xanadu Quantum Technologies Cl B (XNDU-Q) Stock Price and News",
+      "url": "https://www.theglobeandmail.com/investing/markets/stocks/XNDU/",
+      "source": "The Globe and Mail",
+      "sentiment": "Bullish",
+      "score": 2,
+      "time": "20260929T042"
+    },
+    {
+      "title": "MSCI Launches AI Value Chain Indexes as Hedging Demand Grows",
+      "url": "https://ca.finance.yahoo.com/news/msci-launches-ai-value-chain-025954164.html",
+      "source": "Yahoo! Finance Canada",
+      "sentiment": "Bullish",
+      "score": 2,
+      "time": "20260929T030"
+    }
+  ]
 }

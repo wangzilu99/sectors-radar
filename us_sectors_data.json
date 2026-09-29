@@ -1,7 +1,7 @@
 {
   "market": "us",
-  "updated_at": "2026-09-29 03:29:44",
-  "updated_ts": 1790652584397,
+  "updated_at": "2026-09-29 06:22:47",
+  "updated_ts": 1790662967331,
   "sectors": [
     {
       "name": "数字货币",
@@ -292,46 +292,28 @@
       "name": "半导体",
       "icon": "💿",
       "sym": "SOXX",
-      "chg1d": -2.076,
-      "chg5d": 0.259,
-      "spark": [
-        572.78,
-        565.72,
-        566.07,
-        572.68,
-        560.79
-      ],
-      "price": 560.79
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "存储芯片",
       "icon": "💾",
       "sym": "MU",
-      "chg1d": -2.615,
-      "chg5d": 0.96,
-      "spark": [
-        1096.16,
-        1071.88,
-        1080.53,
-        1082.28,
-        1053.98
-      ],
-      "price": 1053.98
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "光通信",
       "icon": "💡",
       "sym": "FIVG",
-      "chg1d": -1.694,
-      "chg5d": -2.164,
-      "spark": [
-        87.0165,
-        85.831,
-        85.6238,
-        86.3199,
-        84.8578
-      ],
-      "price": 84.8578
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     }
   ],
   "index": [
@@ -339,46 +321,28 @@
       "name": "标普500",
       "icon": "🇺🇸",
       "sym": "SPY",
-      "chg1d": -0.744,
-      "chg5d": -1.02,
-      "spark": [
-        773.38,
-        767.81,
-        767.18,
-        771.35,
-        765.61
-      ],
-      "price": 765.61
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "纳斯达克",
       "icon": "💻",
       "sym": "QQQ",
-      "chg1d": -1.071,
-      "chg5d": -0.666,
-      "spark": [
-        747.46,
-        741.21,
-        741.1,
-        744.5,
-        736.53
-      ],
-      "price": 736.53
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "道琼斯",
       "icon": "🏛️",
       "sym": "DIA",
-      "chg1d": -0.671,
-      "chg5d": -1.108,
-      "spark": [
-        518.0,
-        514.3,
-        512.68,
-        517.49,
-        514.02
-      ],
-      "price": 514.02
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "小盘股",

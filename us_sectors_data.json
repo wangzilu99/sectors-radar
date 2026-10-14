@@ -1,7 +1,7 @@
 {
   "market": "us",
-  "updated_at": "2026-10-14 02:54:10",
-  "updated_ts": 1791946450765,
+  "updated_at": "2026-10-14 05:36:45",
+  "updated_ts": 1791956205439,
   "sectors": [
     {
       "name": "数字货币",
@@ -172,100 +172,166 @@
       "name": "军工",
       "icon": "🛡️",
       "sym": "ITA",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.985,
+      "chg5d": -2.046,
+      "spark": [
+        203.6,
+        204.88,
+        206.65,
+        206.03,
+        204.0
+      ],
+      "price": 204.0
     },
     {
       "name": "油气",
       "icon": "🛢️",
       "sym": "XLE",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": 1.803,
+      "chg5d": 5.412,
+      "spark": [
+        63.36,
+        65.24,
+        65.08,
+        66.01,
+        67.2
+      ],
+      "price": 67.2
     },
     {
       "name": "AI算力",
       "icon": "🖥️",
       "sym": "NVDA",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": 0.972,
+      "chg5d": -4.481,
+      "spark": [
+        237.47,
+        230.48,
+        229.28,
+        226.32,
+        228.52
+      ],
+      "price": 228.52
     },
     {
       "name": "零售",
       "icon": "🛒",
       "sym": "XRT",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": 0.214,
+      "chg5d": 1.664,
+      "spark": [
+        82.91,
+        83.91,
+        84.09,
+        84.15,
+        84.33
+      ],
+      "price": 84.33
     },
     {
       "name": "医药",
       "icon": "💊",
       "sym": "IBB",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -2.076,
+      "chg5d": -1.516,
+      "spark": [
+        203.34,
+        200.48,
+        206.49,
+        204.26,
+        200.02
+      ],
+      "price": 200.02
     },
     {
       "name": "光伏",
       "icon": "☀️",
       "sym": "TAN",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": 2.07,
+      "chg5d": -0.045,
+      "spark": [
+        43.53,
+        43.32,
+        43.75,
+        43.48,
+        44.38
+      ],
+      "price": 44.38
     },
     {
       "name": "化工",
       "icon": "🧪",
       "sym": "XLB",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": 0.566,
+      "chg5d": -0.02,
+      "spark": [
+        48.98,
+        49.27,
+        49.43,
+        49.44,
+        49.72
+      ],
+      "price": 49.72
     },
     {
       "name": "食品饮料",
       "icon": "🍽️",
       "sym": "XLP",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.261,
+      "chg5d": 2.922,
+      "spark": [
+        81.7,
+        83.42,
+        83.43,
+        84.41,
+        84.19
+      ],
+      "price": 84.19
     },
     {
       "name": "半导体",
       "icon": "💿",
       "sym": "SOXX",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.174,
+      "chg5d": -7.728,
+      "spark": [
+        582.82,
+        563.28,
+        559.4,
+        544.85,
+        543.9
+      ],
+      "price": 543.9
     },
     {
       "name": "存储芯片",
       "icon": "💾",
       "sym": "MU",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -3.625,
+      "chg5d": -8.835,
+      "spark": [
+        1088.0,
+        1035.84,
+        1029.0,
+        989.04,
+        953.19
+      ],
+      "price": 953.19
     },
     {
       "name": "光通信",
       "icon": "💡",
       "sym": "FIVG",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.478,
+      "chg5d": -5.759,
+      "spark": [
+        88.85,
+        86.4902,
+        87.3286,
+        85.3661,
+        84.9581
+      ],
+      "price": 84.9581
     }
   ],
   "index": [
@@ -273,28 +339,46 @@
       "name": "标普500",
       "icon": "🇺🇸",
       "sym": "SPY",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.012,
+      "chg5d": -0.139,
+      "spark": [
+        777.22,
+        773.93,
+        778.57,
+        778.1,
+        778.01
+      ],
+      "price": 778.01
     },
     {
       "name": "纳斯达克",
       "icon": "💻",
       "sym": "QQQ",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.331,
+      "chg5d": -2.118,
+      "spark": [
+        757.73,
+        747.58,
+        751.27,
+        746.04,
+        743.57
+      ],
+      "price": 743.57
     },
     {
       "name": "道琼斯",
       "icon": "🏛️",
       "sym": "DIA",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": -0.328,
+      "chg5d": 0.321,
+      "spark": [
+        511.02,
+        511.65,
+        516.11,
+        517.91,
+        516.21
+      ],
+      "price": 516.21
     },
     {
       "name": "小盘股",

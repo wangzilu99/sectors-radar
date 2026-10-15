@@ -1,7 +1,7 @@
 {
   "market": "us",
-  "updated_at": "2026-10-15 09:38:39",
-  "updated_ts": 1792057119833,
+  "updated_at": "2026-10-15 12:27:43",
+  "updated_ts": 1792067263837,
   "sectors": [
     {
       "name": "数字货币",
@@ -354,16 +354,10 @@
       "name": "纳斯达克",
       "icon": "💻",
       "sym": "QQQ",
-      "chg1d": -1.966,
-      "chg5d": -3.798,
-      "spark": [
-        747.58,
-        751.27,
-        746.04,
-        743.57,
-        728.95
-      ],
-      "price": 728.95
+      "chg1d": null,
+      "chg5d": null,
+      "spark": [],
+      "price": null
     },
     {
       "name": "道琼斯",

@@ -1,7 +1,7 @@
 {
   "market": "us",
-  "updated_at": "2026-10-22 02:39:58",
-  "updated_ts": 1792636798651,
+  "updated_at": "2026-10-22 05:35:50",
+  "updated_ts": 1792647350322,
   "sectors": [
     {
       "name": "数字货币",
@@ -369,10 +369,16 @@
       "name": "道琼斯",
       "icon": "🏛️",
       "sym": "DIA",
-      "chg1d": null,
-      "chg5d": null,
-      "spark": [],
-      "price": null
+      "chg1d": 0.637,
+      "chg5d": 2.341,
+      "spark": [
+        521.18,
+        519.1,
+        518.92,
+        524.36,
+        527.7
+      ],
+      "price": 527.7
     },
     {
       "name": "小盘股",
